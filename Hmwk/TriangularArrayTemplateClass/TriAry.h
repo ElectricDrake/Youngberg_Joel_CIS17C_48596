@@ -7,56 +7,75 @@
 #include <ctime>
 using namespace std;
 
+
 class TriAry{
 
 private:
+    int cols;
+    int *array;
+    int cls, rows, perLine;
 
 public:
     //Class Member Functions
     //Overloaded Constructor
-    TriArray(int);
-    TriArray(int,int);
-    TriArray(int,int*);
+    TriAry();
+    //TriAry(int,int);
+    //TriAry(int,int*);
     //Overloaded Display
-    void printArray(int*,int,int);
-    void printArray(int**,int,int);
-    void printArray(int**,int,int *);
+    void printArray();
+    //void printArray(int**,int,int);
+    //void printArray(int**,int,int *);
     //Convert this to destructor
-    void destroy(int *);
-    void destroy(int **,int);
+    //void destroy(int *);
+    //void destroy(int **,int);
 
 };
 
-TriArray(int){
-
+TriAry::TriAry(){
+    //Create the 1D Array
+    //Initialize the random number seed
+    srand(static_cast<unsigned int>(time(0)));
+    cols = 5;
+    cls=rows, perLine=10;
+    array=new int[cols];
+    //Fill array with random 2 digit numbers
+    for(int col=0;col<cols;col++){
+            array[col]=rand()%9+2;
+    }
 }
 
-TriArray(int,int){
+//TriArray::TriArray(int,int){
 
+//}
+
+//TriArray::TriArray(int,int*){
+
+//}
+
+void TriAry::printArray(){
+    //Print the Array
+        cout<<endl;
+        for(int col=0;col<cols;col++){
+           cout<<array[col]<<" ";
+           if(col%perLine==(perLine-1))cout<<endl;
+        }
+        cout<<endl;
 }
 
-TriArray(int,int*){
+//void TriArray::printArray(int**,int,int){
 
-}
+//}
 
-void printArray(int*,int,int){
+//void TriArray::printArray(int**,int,int *){
 
-}
+//}
 
-void printArray(int**,int,int){
+//void TriArray::destroy(int *){
 
-}
+//}
 
-void printArray(int**,int,int *){
+//void TriArray::destroy(int **,int){
 
-}
-
-void destroy(int *){
-
-}
-
-void destroy(int **,int){
-
-}
+//}
 
 #endif // TRIARY_H
