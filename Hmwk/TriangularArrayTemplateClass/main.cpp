@@ -10,6 +10,11 @@ int main()
     TriAry Trig;//Constructor Creates Arrays Here
 
     Trig.printArray();
+
+    cout << endl;
+    cout << endl;
+
+    Trig.printArray2D();
     return 0;
 }
 

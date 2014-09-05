@@ -48,9 +48,11 @@ TriAry::TriAry(){
     //Create array2D here
     array2D=new int*[rows];
     for(int row=0;row<rows;row++){
-      array[row]=new int[cols];
+      array2D[row]=new int[cols];
     }
     //Fill the array with random 2 digit numbers
+        rows=5;
+        cols=10;
         for(int row=0;row<rows;row++){
             for(int col=0;col<cols;col++){
                 array2D[row][col]=rand()%90+10;
@@ -69,6 +71,7 @@ TriAry::TriAry(){
 void TriAry::printArray(){
     //Print the Array
         cout<<endl;
+        cols=5;
         for(int col=0;col<cols;col++){
            cout<<array[col]<<" ";
            if(col%perLine==(perLine-1))cout<<endl;
@@ -76,8 +79,15 @@ void TriAry::printArray(){
         cout<<endl;
 }
 
-void TriArray::printArray2D(){
-
+void TriAry::printArray2D(){
+    //Print array2D
+    cols=10;
+    for(int row=0;row<rows;row++){
+        for(int col=0;col<cols;col++){
+            cout<<array2D[row][col]<<" ";
+        }
+        cout << endl;
+    }
 }
 
 //void TriArray::printArray(int**,int,int *){
