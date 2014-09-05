@@ -2,39 +2,36 @@
 #define TRIARY_H
 
 //System Libraries
-#include <cstdlib>
-#include <iostream>
-#include <ctime>
+#include <cstdlib>//Random # generation
+#include <iostream>//I/O
+#include <ctime>//Random # generation
+#include <iomanip>//To show floats vs ints
 using namespace std;
 
-
+template <class T>
 class TriAry{
 
 private:
     int cols;
-    int *array;
-    int ** array2D;
-    int ** trigAry;
+    int *array;//Column Array
+    int ** array2D;// Two dimensional test array
+    T ** trigAry;// Triangular array
     int cls, rows, perLine;
 
 public:
-    //Constructor creates first two arrays
+    //Constructor creates/initializes three first arrays
     TriAry();
-    //TriAry(int,int);
-    //TriAry(int,int*);
+    //Destructor to clean up dynamic arrays
+    ~TriAry();
 
     //Class Member Functions
-    //Overloaded Display
+    void templateTrigAry();
     void printArray();
     void printArray2D();
-    //void printArray(int**,int,int *);
-    //Convert this to destructor
-    //void destroy(int *);
-    //void destroy(int **,int);
-
+    void printTriAry();
 };
-
-TriAry::TriAry(){
+template <class T>
+TriAry<T>::TriAry(){
     //Create the 1D Array
     //Initialize the random number seed
     srand(static_cast<unsigned int>(time(0)));
@@ -57,18 +54,39 @@ TriAry::TriAry(){
             for(int col=0;col<cols;col++){
                 array2D[row][col]=rand()%90+10;
             }
-        }
+        }//End Create Regular 2D Array
+
+        //Create Triangular array
+            trigAry=new T*[rows];
+            for(int row=0;row<rows;row++){
+                trigAry[row]=new T[array[row]];
+            }
+            //Fill the array with random 2 digit numbers
+            for(int row=0;row<rows;row++){
+                for(int col=0;col<array[row];col++){
+                    trigAry[row][col]=rand()%90+10;
+                }
+            }
+
+}//End Constructor
+template <class T>
+TriAry<T>::~TriAry(){
+    //Destroy row pointers
+    delete []array;
+
+    //Destroy row pointers
+    delete []array2D;
+
+    //Destroy cols
+    for(int row=0;row<rows;row++){
+           delete []trigAry[row];
+       }
+       //Destroy row pointers
+       delete []trigAry;
+
 }
-
-//TriArray::TriArray(int,int){
-
-//}
-
-//TriArray::TriArray(int,int*){
-
-//}
-
-void TriAry::printArray(){
+template <class T>
+void TriAry<T>::printArray(){
     //Print the Array
         cout<<endl;
         cols=5;
@@ -78,8 +96,8 @@ void TriAry::printArray(){
         }
         cout<<endl;
 }
-
-void TriAry::printArray2D(){
+template <class T>
+void TriAry<T>::printArray2D(){
     //Print array2D
     cols=10;
     for(int row=0;row<rows;row++){
@@ -89,17 +107,22 @@ void TriAry::printArray2D(){
         cout << endl;
     }
 }
+template <class T>
+void TriAry<T>::printTriAry(){
+    //Print the Array
+    cout << fixed << showpoint << setprecision(2);
+        cout<<endl;
+        for(int row=0;row<rows;row++){
+            for(int col=0;col<array[row];col++){
+                cout<<trigAry[row][col]<<" ";
+            }
+            cout<<endl;
+        }
+        cout<<endl;
+}
 
-//void TriArray::printArray(int**,int,int *){
+void templateTrigAry(){
 
-//}
-
-//void TriArray::destroy(int *){
-
-//}
-
-//void TriArray::destroy(int **,int){
-
-//}
+}
 
 #endif // TRIARY_H
