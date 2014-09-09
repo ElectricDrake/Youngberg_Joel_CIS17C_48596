@@ -12,6 +12,7 @@ class SimpleVector
 private:
    T *aptr;          // To point to the allocated array
    int arraySize;    // Number of elements in the array
+   int arrayCap;     // Total Capacity of array
    void memError();  // Handles memory allocation errors
    void subError();  // Handles subscripts out of range
 
