@@ -168,27 +168,24 @@ void SimpleVector<T>::push(T add){
     //If the array capacity is reached:
     //Recreate the array and double the size
     if (arraySize == arrayCap){
+        arrayCap *= 2;//Doubling array capacity
+
+        //Allocate a temporary array
+            arrayTemp = new T [arrayCap];
+            //Initialize, then Fill temporary array with old values
+            // Initialize the array - setting all values to zero
+         for (int count = 0; count < arrayCap; count++)
+            arrayTemp[count] = 0;
+
         for(int i=0;i<arraySize;i++){
             arrayTemp[i] = aptr[i];//Assigning current values to temporary array
         }//End for loop
+
         delete [] aptr;//delete old array
-        //Now create new array with double capacity
-        arrayCap *= 2;//Doubling array capacity
-        // Allocate memory for the array - array capacity is doubled
-        try
-        {
-           aptr = new T [arrayCap];
-        }
-        catch (bad_alloc)
-        {
-           memError();
-        }
-        // Initialize the array - setting all values to zero
-        for (int count = 0; count < arrayCap; count++)
-           *(aptr + count) = 0;
-        //Restore stored values of previous array
-        for (int count = 0; count < arraySize; count++)
-           aptr[count] = arrayTemp[count];
+
+        //Now create new array by changing pointer to temporary array
+        aptr = arrayTemp;
+
     }//End if Statement
 }//End push function
 
