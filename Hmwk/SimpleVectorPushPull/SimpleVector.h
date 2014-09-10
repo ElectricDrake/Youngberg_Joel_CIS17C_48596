@@ -171,6 +171,7 @@ void SimpleVector<T>::push(T add){
         for(int i=0;i<arraySize;i++){
             arrayTemp[i] = aptr[i];//Assigning current values to temporary array
         }//End for loop
+        delete [] aptr;//delete old array
         //Now create new array with double capacity
         arrayCap *= 2;//Doubling array capacity
         // Allocate memory for the array - array capacity is doubled
