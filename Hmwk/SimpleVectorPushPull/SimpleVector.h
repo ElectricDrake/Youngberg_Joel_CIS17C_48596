@@ -11,7 +11,7 @@ class SimpleVector
 {
 private:
    T *aptr;          // To point to the allocated array
-   T *tempAry;       // To hold values of array when changing size
+   T *arrayTemp;       // To hold values of array when changing size
    int arraySize;    // Number of elements in the array
    int arrayCap;     // Total Capacity of array
    void memError();  // Handles memory allocation errors
@@ -73,7 +73,7 @@ SimpleVector<T>::SimpleVector(int s)
 
    // Initialize the array - setting all values to zero
    for (int count = 0; count < arrayCap; count++)
-      *(aptr + count) = count;
+      *(aptr + count) = 0;
 }
 
 //*******************************************
@@ -160,14 +160,36 @@ T &SimpleVector<T>::operator[](const int &sub)
 }
 
 //Push function for adding new index onto array (vector)
-/*Takes value in, creates new array, then adds
-  the new value to the front of the array*/
 template <class T>
 void SimpleVector<T>::push(T add){
     arraySize++;//Add additional array index
     //Add value to index at last location:
     aptr[arraySize-1] = add;
-}
+    //If the array capacity is reached:
+    //Recreate the array and double the size
+    if (arraySize == arrayCap){
+        for(int i=0;i<arraySize;i++){
+            arrayTemp[i] = aptr[i];//Assigning current values to temporary array
+        }//End for loop
+        //Now create new array with double capacity
+        arrayCap *= 2;//Doubling array capacity
+        // Allocate memory for the array - array capacity is doubled
+        try
+        {
+           aptr = new T [arrayCap];
+        }
+        catch (bad_alloc)
+        {
+           memError();
+        }
+        // Initialize the array - setting all values to zero
+        for (int count = 0; count < arrayCap; count++)
+           *(aptr + count) = 0;
+        //Restore stored values of previous array
+        for (int count = 0; count < arraySize; count++)
+           aptr[count] = arrayTemp[count];
+    }//End if Statement
+}//End push function
 
 //Pull function for subtracting an index from array (vector)
 template <class T>
@@ -175,12 +197,17 @@ void SimpleVector<T>::pull(){
     //Set last array value to zero
     aptr[arraySize-1] = 0;
     arraySize--;//Remove array index
-
 }
 
 template <class T>
 void SimpleVector<T>::display(){
     for(int i=0; i< arraySize;i++){
+        cout << aptr[i] << " ";
+    }
+    cout << endl;
+    cout << endl;
+    //Test Display
+    for(int i=0; i< arrayCap;i++){
         cout << aptr[i] << " ";
     }
     cout << endl;
