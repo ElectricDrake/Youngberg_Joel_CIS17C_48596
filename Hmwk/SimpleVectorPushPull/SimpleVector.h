@@ -11,6 +11,7 @@ class SimpleVector
 {
 private:
    T *aptr;          // To point to the allocated array
+   T *tempAry;       // To hold values of array when changing size
    int arraySize;    // Number of elements in the array
    int arrayCap;     // Total Capacity of array
    void memError();  // Handles memory allocation errors
@@ -45,6 +46,9 @@ public:
 
    //Pull function for subtracting an index from array (vector)
    void pull();
+
+   //Display function for the vector
+   void display();
 };
 
 //***********************************************************
@@ -56,19 +60,20 @@ template <class T>
 SimpleVector<T>::SimpleVector(int s)
 {
    arraySize = s;
-   // Allocate memory for the array.
+   arrayCap = s*2;
+   // Allocate memory for the array - array capacity is doubled
    try
    {
-      aptr = new T [s];
+      aptr = new T [arrayCap];
    }
    catch (bad_alloc)
    {
       memError();
    }
 
-   // Initialize the array.
-   for (int count = 0; count < arraySize; count++)
-      *(aptr + count) = 0;
+   // Initialize the array - setting all values to zero
+   for (int count = 0; count < arrayCap; count++)
+      *(aptr + count) = count;
 }
 
 //*******************************************
@@ -79,15 +84,15 @@ template <class T>
 SimpleVector<T>::SimpleVector(const SimpleVector &obj)
 {
    // Copy the array size.
-   arraySize = obj.arraySize;
+   arrayCap = obj.arrayCap;
 
    // Allocate memory for the array.
-   aptr = new T [arraySize];
+   aptr = new T [arrayCap];
    if (aptr == 0)
       memError();
 
    // Copy the elements of obj's array.
-   for(int count = 0; count < arraySize; count++)
+   for(int count = 0; count < arrayCap; count++)
       *(aptr + count) = *(obj.aptr + count);
 }
 
@@ -98,7 +103,7 @@ SimpleVector<T>::SimpleVector(const SimpleVector &obj)
 template <class T>
 SimpleVector<T>::~SimpleVector()
 {
-   if (arraySize > 0)
+   if (arrayCap > 0)
       delete [] aptr;
 }
 
@@ -160,15 +165,26 @@ T &SimpleVector<T>::operator[](const int &sub)
 template <class T>
 void SimpleVector<T>::push(T add){
     arraySize++;//Add additional array index
-    //Create new array...then push new value on front
-    for (int count = 0; count < arraySize; count++)
-       *aptr[count];
+    //Add value to index at last location:
+    aptr[arraySize-1] = add;
 }
 
 //Pull function for subtracting an index from array (vector)
 template <class T>
 void SimpleVector<T>::pull(){
+    //Set last array value to zero
+    aptr[arraySize-1] = 0;
+    arraySize--;//Remove array index
 
+}
+
+template <class T>
+void SimpleVector<T>::display(){
+    for(int i=0; i< arraySize;i++){
+        cout << aptr[i] << " ";
+    }
+    cout << endl;
+    cout << endl;
 }
 
 #endif
