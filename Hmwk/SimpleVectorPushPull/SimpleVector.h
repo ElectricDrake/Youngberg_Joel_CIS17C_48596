@@ -199,8 +199,13 @@ void SimpleVector<T>::pull(){
     aptr[arraySize-1] = 0;
     arraySize--;//Remove array index
 
+    if(arraySize<0){
+        arraySize=0;//Preventing array size from going negative
+        cout << "Error...vector is already empty..." << endl;
+    }
+
     //Analyze contents of array (for possible trimming)
-    int sum;
+    int sum=0;
     for(int i=0; i<arrayCap;i++){
         if(aptr[i]==0)
             sum++;
@@ -210,7 +215,7 @@ void SimpleVector<T>::pull(){
         int sub = arrayCap / 3;
         arrayCap -= sub;//Deleting one third array capacity
 
-        int sum2;
+        int sum2=0;
         for(int i=0; i<arrayCap;i++){
             if(aptr[i]!=0)
                 sum2++;//Finding array size
@@ -243,7 +248,7 @@ void SimpleVector<T>::display(){
     }
     cout << endl;
     cout << endl;
-    //Test Display
+    //Capacity Test Display
     cout << "Actual vector capacity: " << endl;
     for(int i=0; i< arrayCap;i++){
         cout << aptr[i] << " ";

@@ -39,6 +39,7 @@ int main()
         Vector.display();
     }
     else if (pp == 0) {//If pulling a value, execute this:
+        cout << endl;
         cout << "Pulling value from the end of vector: " << endl;
         Vector.pull();
         //Display Vector with removed value
