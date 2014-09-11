@@ -11,8 +11,18 @@ int main()
     //int indexVal = 0; //Originally for choosing index to pull...
 
     cout << "Simple Vector Program With Push & Pull Features" << endl;
+
+    do{//Validate input - must be at least one index in inital creation
     cout << "Please enter the number of indexes for the initial vector: " << endl;
     cin >> initSize;
+
+    if(initSize<=0){
+        cout << "Error... must create at least one index to initialize vector..." << endl;
+        cout << "What good is a vector with no indexes anyway!!?" << endl;
+        cout << endl;
+    }
+
+    }while(initSize<=0);
 
     //Instantiate Vector Object
     SimpleVector<int> Vector(initSize);
