@@ -74,6 +74,9 @@ SimpleVector<T>::SimpleVector(int s)
    // Initialize the array - setting all values to zero
    for (int count = 0; count < arrayCap; count++)
       *(aptr + count) = 0;
+   // Initialize the array - setting size values to one
+   for (int count = 0; count < arraySize; count++)
+      *(aptr + count) = 1;
 }
 
 //*******************************************
@@ -195,16 +198,53 @@ void SimpleVector<T>::pull(){
     //Set last array value to zero
     aptr[arraySize-1] = 0;
     arraySize--;//Remove array index
-}
+
+    //Analyze contents of array (for possible trimming)
+    int sum;
+    for(int i=0; i<arrayCap;i++){
+        if(aptr[i]==0)
+            sum++;
+    }
+
+    if (arraySize*3 >= arrayCap){
+        int sub = arrayCap / 3;
+        arrayCap -= sub;//Deleting one third array capacity
+
+        int sum2;
+        for(int i=0; i<arrayCap;i++){
+            if(aptr[i]!=0)
+                sum2++;//Finding array size
+        }
+
+        //Allocate a temporary array
+            arrayTemp = new T [arrayCap];
+            //Initialize, then Fill temporary array with old values
+            // Initialize the array - setting all values to zero
+         for (int count = 0; count < arrayCap; count++)
+            arrayTemp[count] = 0;
+
+        for(int i=0;i<arraySize;i++){
+            arrayTemp[i] = aptr[i];//Assigning current values to temporary array
+        }//End for loop
+
+        delete [] aptr;//delete old array
+
+        //Now create new array by changing pointer to temporary array
+        aptr = arrayTemp;
+
+    }//End if Statement
+}//End pull function
 
 template <class T>
 void SimpleVector<T>::display(){
+    cout << "User vector(vector size):" << endl;
     for(int i=0; i< arraySize;i++){
         cout << aptr[i] << " ";
     }
     cout << endl;
     cout << endl;
     //Test Display
+    cout << "Actual vector capacity: " << endl;
     for(int i=0; i< arrayCap;i++){
         cout << aptr[i] << " ";
     }
