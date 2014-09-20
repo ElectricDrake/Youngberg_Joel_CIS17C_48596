@@ -1,6 +1,0 @@
-BIO_new_file: C:\usr\local\openssl/ssl/openssl.cnf
-BIO_new_file: MultiByteToWideChar(CP_UTF8,flags,filename,len_0,wfilename,sz): 37
-BIO_new_file: MultiByteToWideChar(CP_UTF8,0,mode,strlen(mode)+1,wmode,sizeof(wmode)/sizeof(wmode[0])): 3
-BIO_new_file: Trying fopen ...
-BIO_new_file: Can't open: ERRNO=No such file or directory
-BIO_new_file: ENOENT
