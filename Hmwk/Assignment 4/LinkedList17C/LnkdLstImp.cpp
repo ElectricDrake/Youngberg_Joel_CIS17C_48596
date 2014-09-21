@@ -8,7 +8,6 @@ LnkdLst::LnkdLst(int d){
 
 void LnkdLst::append(int integer){
     Node *newNode; //Points to a new node
-    Node *nodePtr; //For moving through list
 
     //Allocating a new node & storing integer
     newNode = new Node;
@@ -20,15 +19,15 @@ void LnkdLst::append(int integer){
     if(!head)
         head = newNode;
     else {//Otherwise, insert newNode at the end
-        //Initialize nodePtr to the head of the list
-        nodePtr = head;//Start at beginning of list
+        //Initialize worker to the head of the list
+        worker = head;//Start at beginning of list
 
         //Find the last node (by stepping through list)
-        while(nodePtr->next)
-            nodePtr = nodePtr->next;
+        while(worker->next)
+            worker = worker->next;
 
         //Insert newNode as the last node
-        nodePtr->next = newNode;
+        worker->next = newNode;
     }
 }//End append function
 
@@ -36,26 +35,41 @@ string LnkdLst::toString(){
     //std::string s = std::to_string(42);
     string temp;
     string str;
-    Node *nodePtr; // To move through the list
 
-    // Position nodePtr at the head of the list.
-    nodePtr = head;
+    // Position worker at the head of the list.
+    worker = head;
 
-    // While nodePtr points to a node, traverse
+    // While worker points to a node, traverse
     // the list.
-     while (nodePtr)
+     while (worker)
     {
     // Put the value and a space into a string here ////////
-    temp = to_string(nodePtr->data);
+    temp = to_string(worker->data);
     str += temp + " ";
 
     // Move to the next node.
-    nodePtr = nodePtr->next;
+    worker = worker->next;
     }//End While
 
     return str;
 }//End toString Function
 
-LnkdLst::~LnkdLst(){
-    //delete [] newNode;
+LnkdLst::~LnkdLst(){//Destructor steps through list & deletes
+
+    Node *nextNode; // To point to the next node
+
+    // Position worker at the head of the list.
+    worker = head;
+
+    // While worker is not at the end of the list...
+    while (worker != NULL)
+    {
+    // Save a pointer to the next node.
+    nextNode = worker->next;
+
+    // Delete the current node.
+    delete worker;
+
+    // Position worker at the next node.
+    worker = nextNode;
 }
