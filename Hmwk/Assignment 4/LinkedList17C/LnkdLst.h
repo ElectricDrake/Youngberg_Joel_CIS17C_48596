@@ -3,7 +3,7 @@
 
 /*
  * File:   LnkdLst.h
- * Author: Dr. Mark E. Lehr
+ * Author: Dr. Mark E. Lehr Edited by Joel Youngberg
  * Created on September 18, 2014, 3:09 PM
  */
 

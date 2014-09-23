@@ -72,4 +72,6 @@ LnkdLst::~LnkdLst(){//Destructor steps through list & deletes
 
     // Position worker at the next node.
     worker = nextNode;
+  }
 }
+
