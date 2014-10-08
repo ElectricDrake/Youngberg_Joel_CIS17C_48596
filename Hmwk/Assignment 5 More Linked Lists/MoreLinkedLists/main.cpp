@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 	cout << "Linked List By Joel R. Youngberg: " << endl;
 
 	//Create a linked list
-	LnkdLst List(0);
+	LnkdLst<int> List(0);
 	//Append 3 more chains
 	cout << "Appending three values to list: " << endl;
 	int clinks = 3;
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
 
 	cout << "Demonstrating copy constructor: " << endl;
 	//Declare second list object:
-	LnkdLst List2(List);
+	LnkdLst<int> List2(List);
 
 	cout << "First List: " << endl;
 	cout << List.toString() << endl;
@@ -81,13 +81,6 @@ int main(int argc, char** argv) {
 	List.insertSort(0);
 	List.insertSort(9);
 	cout << List.toString() << endl;
-
-
-
-
-
-
-
 
 	//Exit stage right!
 	return 0;
