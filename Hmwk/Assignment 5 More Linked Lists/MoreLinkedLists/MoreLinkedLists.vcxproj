@@ -78,10 +78,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Cont.h" />
     <ClInclude Include="LnkdLst.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LnkdLstImp.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

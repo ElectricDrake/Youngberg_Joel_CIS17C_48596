@@ -7,8 +7,9 @@
 * It may not compile without a C++ 11 compatible compiler
 */
 
-//Our Library
+//Our Librarys
 #include "LnkdLst.h"
+#include "Cont.h"
 
 int main(int argc, char** argv) {
 
@@ -82,6 +83,34 @@ int main(int argc, char** argv) {
 	List.insertSort(9);
 	cout << List.toString() << endl;
 
+	cout << endl;
+	cout << endl;
+	cout << "Testing templated list with objects..." << endl;
+	cout << "Declare object type linked list: " << endl;
+	//Linked list of containers... (containing ints...)
+	LnkdLst<Cont> ContainerList(0);
+	cout << "Appending three values to list: " << endl;
+	//Declaring three objects
+	Cont One;
+	Cont Two;
+	Cont Three;
+	//Setting values to objects private data members
+	One.setNum(1);
+	Two.setNum(2);
+	Three.setNum(3);
+	//Adding objects to linked list
+		ContainerList.append(One);
+		ContainerList.append(Two);
+		ContainerList.append(Three);
+
+	cout << "Displaying three values in list: " << endl;
+
+	cout << ContainerList.getFirst().getNum() << endl;
+	cout << ContainerList.position(1).getNum() << endl;
+	cout << ContainerList.position(2).getNum() << endl;
+	cout << ContainerList.position(3).getNum() << endl;
+
+	
 	//Exit stage right!
 	return 0;
 }

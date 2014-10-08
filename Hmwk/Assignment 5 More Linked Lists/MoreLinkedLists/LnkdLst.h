@@ -17,7 +17,7 @@ template <class T>
 class LnkdLst {
 private://Class private variables/etc.
 	struct Node{
-		int data;
+		T data;
 		Node *next;//For linking to next node
 	};
 	Node *head;
@@ -25,20 +25,20 @@ private://Class private variables/etc.
 
 public://Class member functions
 	LnkdLst(int);
-	void append(int);
+	void append(T);
 	void prepend(int);//More Linked List
 	string toString();
 	virtual ~LnkdLst();
 
 	//More Linked List Additional Functions:
-	int getFirst();
+	T getFirst();
 	int getLast();
 
 	//copy constructor and assignment operator
 	LnkdLst(LnkdLst &obj);
 	void operator=(LnkdLst &obj);
 
-	int position(int);//Returns value in that position... similar to array
+	T position(int);//Returns value in that position... similar to array
 	void extract(int);
 	void insertSort(int);
 	//void insertAfter(int);
@@ -51,12 +51,12 @@ LnkdLst<T>::LnkdLst(int d){
 	head = NULL; //Setting head of linked list to NULL
 }
 template <class T>
-void LnkdLst<T>::append(int integer){
+void LnkdLst<T>::append(T value){
 	Node *newNode; //Points to a new node
 
 	//Allocating a new node & storing integer
 	newNode = new Node;
-	newNode->data = integer;
+	newNode->data = value;
 	newNode->next = NULL;
 
 	//If there are no nodes in the linked list
@@ -136,13 +136,9 @@ LnkdLst<T>::~LnkdLst(){//Destructor steps through list & deletes
 	}
 }//End Destructor
 template <class T>
-int LnkdLst<T>::getFirst(){
+T LnkdLst<T>::getFirst(){
 	//Return the first value in the linked list
-	int num = 0;
-
-	num = head->data;
-
-	return num;
+	return head->data;
 }
 template <class T>
 int LnkdLst<T>::getLast(){
@@ -157,7 +153,7 @@ int LnkdLst<T>::getLast(){
 	return num;
 }
 template <class T>
-int LnkdLst<T>::position(int integer){
+T LnkdLst<T>::position(int integer){
 
 	worker = head; //Set worker to beginning of list
 
