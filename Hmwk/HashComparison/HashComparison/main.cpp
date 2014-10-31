@@ -6,12 +6,7 @@
 //elapsed = t1 - t0;
 
 //Libraries
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
-
-using namespace std;
+#include "Hash.h"
 
 
 //Function Prototypes
@@ -21,10 +16,10 @@ int binarySearch(string[], int, string);
 
 int main(){
 	//Create large array
-	const int size = 10000000;
-	string *array;
+	const int size = 10;
+	
 	//Use dynamic allocation to create a larger array...
-	array = new string[size];
+	string *array = new string[size];
 	int numChar = 20;//Number of Characters (in each string)
 	int randNum = 0;
 	string notInAry = "$aaaaaaaaaaaaaaaaaaa";
@@ -89,16 +84,32 @@ int main(){
 	cout << "Binary Search Time in Array (Halfway point): " << elapseT << endl;
 	cout << matchInd << endl;
 	
-	
-
-	
-	
 
 	//cout << array[0] << endl;
 	cout << array[1] << endl;
 	cout << array[2] << endl;
 	cout << array[3] << endl;
 	cout << array[50000] << endl;
+
+
+	//Hash Function
+
+	Hash Hashy;
+	Hashy.PrintTable();
+
+	Hashy.AddItem("Joel", "SobeGrapefruit");
+
+	string name = " ";
+
+	while (name != "exit"){
+		cout << "Search for ";
+		cin >> name;
+		if (name != "exit"){
+			Hashy.FindDrink(name);
+		}
+	}
+
+
 
 	delete [] array;
 
